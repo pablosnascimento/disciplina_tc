@@ -1,0 +1,48 @@
+a2 = X[0]
+a1 = X[1]
+a0 = X[2]
+b2 = X[3]
+b1 = X[4]
+b0 = X[5]
+
+nota2 = NAND(a2,a2)
+nota1 = NAND(a1,a1)
+notb2 = NAND(b2,b2)
+notb1 = NAND(b1,b1)
+notb0 = NAND(b0,b0)
+
+temp1 = NAND(a2,notb2)
+nand1 = NAND(temp1,temp1)
+
+temp2 = NAND(nota2,notb2)
+nand2 = NAND(temp2,temp2)
+temp3 = NAND(a2,b2)
+nand3 = NAND(temp3,temp3)
+temp4 = NAND(a1,notb1)
+nand4 = NAND(temp4,temp4)
+tempor1 = NAND(nand2,nand2)
+tempor2 = NAND(nand3,nand3)
+nandor1 = NAND(tempor1,tempor2)
+temp5 = NAND(nandor1,nand4)
+nand5 = NAND(temp5,temp5)
+
+temp6 = NAND(nota1,notb1)
+nand6 = NAND(temp6,temp6)
+temp7 = NAND(a1,b1)
+nand7 = NAND(temp7,temp7)
+temp8 = NAND(a0,notb0)
+nand8 = NAND(temp8,temp8)
+tempor3 = NAND(nand6,nand6)
+tempor4 = NAND(nand7,nand7)
+tempor5 = NAND(tempor3,tempor4)
+temp9 = NAND(tempor5,nand8)
+nand9 = NAND(temp9,temp9)
+temp10 = NAND(nandor1,nand9)
+nand10 = NAND(temp10,temp10)
+
+tempor6 = NAND(nand1,nand1)
+tempor7 = NAND(nand5,nand5)
+nandor3 = NAND(tempor6,tempor7)
+tempor8 = NAND(nandor3,nandor3)
+tempor9 = NAND(nand10,nand10)
+Y[0] = NAND(tempor8,tempor9)

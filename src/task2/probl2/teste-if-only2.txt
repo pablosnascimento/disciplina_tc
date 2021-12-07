@@ -1,0 +1,12 @@
+[{:expr :if
+	:test {:expr :input :index 0}
+	:then ([{:expr :assign
+		    :lhs {:expr :var :name "a"}
+		    :rhs {:expr :funcall :name "AND"
+				 :args [{:expr :input :index 1}
+						{:expr :input :index 2}]}}
+		   {:expr :assign
+		    :lhs {:expr :var :name "b"}
+		    :rhs {:expr :funcall :name "XOR"
+				 :args [{:expr :input :index 1}
+						{:expr :input :index 2}]}}])}]

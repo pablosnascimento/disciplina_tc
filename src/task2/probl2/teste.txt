@@ -1,0 +1,23 @@
+[{:expr :var :name "temp"},
+{:expr :input :index 1},
+{:expr :output :index 1},
+{:expr :funcall :name "NOT" :args [{:expr :var :name "a"}]},
+{:expr :funcall :name "XOR"
+:args [{:expr :var :name "a1"} {:expr :input :index 2}]},
+{:expr :assign
+:lhs {:expr :var :name "and1"}
+:rhs {:expr :funcall :name "AND"
+:args [{:expr :var :name "a1"}
+{:expr :input :index 2}]}},
+{:expr :if
+	:test {:expr :input :index 0}
+	:then {:expr :assign
+		   :lhs {:expr :output :index 0}
+		   :rhs {:expr :funcall :name "NAND"
+				 :args [{:expr :var :name "a"}
+						{:expr :input :index 1}]}}
+	:else {:expr :assign
+		   :lhs {:expr :output :index 0}
+		   :rhs {:expr :funcall :name "XNOR"
+				 :args [{:expr :var :name "b"}
+						{:expr :input :index 2}]}}}]
