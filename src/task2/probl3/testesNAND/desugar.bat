@@ -1,0 +1,1 @@
+for %%i in (mult*.txt) do java -jar ..\..\nand-circ-0.3.3-SNAPSHOT-standalone.jar -v nand -d proc -a desugar < %%i > desugar_%%i

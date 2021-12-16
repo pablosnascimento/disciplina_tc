@@ -1,11 +1,9 @@
 (ns task2.probl2.solucao1
-  (:require [clojure.string :as str]))
+  (:require [clojure.string :as str]
+            [clojure.core.match :refer [match]]))
 (require '[clojure.pprint :as pp])
-(require '[clojure.core.match :refer [match]])
 (require 'clojure.walk)
 (require '[clojure.string :as str])
-
-;(require '[clojure.set :as set])
 
 (declare map-then)
 
@@ -64,12 +62,6 @@
                                            (assoc {} :expr arg1-tipo arg1-nome-tipo arg1-valor)
                                            (assoc {} :expr arg2-tipo arg2-nome-tipo arg2-valor)]))))
 
-;teste impressao
-;(imprime-ast (add-assign-if :var :name "a"
-;                            :var :name "a"
-;                            :var :name "a"
-;                            :var :name "a"))
-
 (defn add-assign-func
   "lhs = function(arg0,arg1) - retorna a atribuição da função no formato expr"
   ([lhs-tipo lhs-nome-tipo lhs-valor
@@ -97,11 +89,6 @@
                                              [(assoc {} :expr arg0-tipo arg0-nome-tipo arg0-valor)]
                                              [(assoc {} :expr arg0-tipo arg0-nome-tipo arg0-valor)
                                               (assoc {} :expr arg1-tipo arg1-nome-tipo arg1-valor)]))))))
-
-;(imprime-ast (add-assign-func :var :name "a"
-;                              :var :name "b"
-;                              :var :name "c"
-;                              :var :name "d"))
 
 (defn is-if [ast] (= :if (get ast :expr)))
 (defn is-assign [ast] (= :assign (get ast :expr)))
@@ -225,13 +212,6 @@
        )
        resultado)))
 
-(println (let [a 1]
-           (doseq [i (range 10)]
-             (println (+ i a))
-             )
-           (println a)
-           ))
-
 ;(imprime-ast (read-ast AST))
 ;(imprime-ast (vals (first (vals (select-keys (first AST) [:then])))))
 
@@ -240,18 +220,3 @@
 ; 1 - tipo do lhs do then
 ;(imprime-ast (first (vals (select-keys (first (first (vals (select-keys (first AST) [:then])))) [:lhs]))))
 ;(imprime-ast (select-keys (last AST) [:then]))
-
-;(println (lhs :expr))
-;(println (lhs {:expr :assign,
-;                    :lhs  {:expr :var, :name "a"},
-;                    :rhs
-;                          {:expr :funcall,
-;                           :name "AND",
-;                           :args [{:expr :input, :index 1} {:expr :input, :index 2}]}}))
-;
-;(println (get (get (rhs {:expr :assign
-;                         :lhs  {:expr :var :name "a"}
-;                         :rhs  {:expr :funcall :name "Y[0]"
-;                                :args [{:expr :input :index 1}
-;                                       {:expr :input :index 2}]}}) :args) 0))
-;

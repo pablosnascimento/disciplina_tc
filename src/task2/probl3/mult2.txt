@@ -1,0 +1,63 @@
+def NOT(a):
+	return NAND(a,a)
+end
+
+def OR(a,b):
+	naa = NAND(a,a)
+	nbb = NAND(b,b)
+	return NAND(naa,nbb)
+end
+
+def AND(a,b):
+	nab = NAND(a,b)
+	return NAND(nab,nab)
+end
+
+def XOR(a, b):
+	or1 = OR(a, b)
+	and1 = AND(a, b)
+	nand1 = NOT(and1)
+	return AND(or1, nand1)
+end
+
+def ONE(a):
+	na = NAND(a,a)
+	return NAND(a,na)
+end
+
+def ZERO(a):
+	nota = ONE(a)
+	return NOT(nota)
+end
+
+s0_0 = AND(X[1],X[3])
+s0_1 = AND(X[1],X[2])
+s0_2 = ZERO(X[0])
+s1_0 = ZERO(X[0])
+s1_1 = AND(X[0],X[3])
+s1_2 = AND(X[0],X[2])
+s1_3 = ZERO(X[0])
+
+Carry0 = ZERO(X[0])
+temp0 = XOR(s0_0, s1_0)
+Somas1_0 = XOR(temp0, Carry0)
+a0 = AND(s0_0, s1_0)
+b0 = AND(temp0, Carry0)
+Carry1 = OR(a0, b0)
+
+temp1 = XOR(s0_1, s1_1)
+Somas1_1 = XOR(temp1, Carry1)
+a1 = AND(s0_1, s1_1)
+b1 = AND(temp1, Carry1)
+Carry2 = OR(a1, b1)
+
+temp2 = XOR(s0_2, s1_2)
+Somas1_2 = XOR(temp2, Carry2)
+a2 = AND(s0_2, s1_2)
+b2 = AND(temp2, Carry2)
+Carry3 = OR(a2, b2)
+Somas1_3 = AND(Carry3, Carry3)
+Y[0] = AND(Somas1_3, Somas1_3)
+Y[1] = AND(Somas1_2, Somas1_2)
+Y[2] = AND(Somas1_1, Somas1_1)
+Y[3] = AND(Somas1_0, Somas1_0)

@@ -1,0 +1,12 @@
+desugar for:
+java -jar ..\probl1\nand-circ-0.3.3-SNAPSHOT-standalone.jar -v nand -d for -a desugar  < mult3T.txt 100100
+
+imprimir codigo
+java -jar ..\probl1\nand-circ-0.3.3-SNAPSHOT-standalone.jar -v nand -d proc -a echo  < mult3T.txt 100100
+
+executando programa aon
+java -jar nand-circ-0.3.3-SNAPSHOT-standalone.jar -v aon -a eval < PROG_AON.txt 100110
+
+transformar codigos com definições de proc para portas apenas NAND
+java -jar ..\probl1\nand-circ-0.3.3-SNAPSHOT-standalone.jar -v nand -d proc -a desugar < mult4.txt > mult4_desugar.txt
+

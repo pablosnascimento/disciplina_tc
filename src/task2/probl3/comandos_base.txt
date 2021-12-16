@@ -1,0 +1,33 @@
+def NOT(a):
+	return NAND(a,a)
+end
+
+def OR(a,b):
+	naa = NAND(a,a)
+	nbb = NAND(b,b)
+	return NAND(naa,nbb)
+end
+
+def AND(a,b):
+	nab = NAND(a,b)
+	return NAND(nab,nab)
+end
+
+def XOR(a, b):
+	or1 = OR(a, b)
+	and1 = AND(a, b)
+	nand1 = NOT(and1)
+	return AND(or1, nand1)
+end
+
+def ONE(a):
+	na = NAND(a,a)
+	return NAND(a,na)
+end
+
+def ZERO(a):
+	nota = ONE(a)
+	return NOT(nota)
+end
+
+Y[0] = ZERO(X[0])

@@ -1,7 +1,6 @@
 (ns task2.probl3.multn
   (:require [clojure.string :as str]))
 (use 'clojure.java.io)
-(:gen-class :main true)
 
 ;comandos NOT, AND, OR, XOR, ONE e XERO definidos em NAND-CIRC.
 (def definicoes
@@ -67,12 +66,19 @@
 ;(println (multn 4))
 
 (defn imprime-multn
+  "Gera um arquivo chamado multn.txt no diretório com a solução da multiplicação de n bits em NAND-CIRC, variante AON"
   [n]
   (with-open [wrtr (writer (format "mult%d.txt" n))]
-    (.write wrtr (clojure.string/join "" (cons definicoes (multn 4))))))
+    (.write wrtr (clojure.string/join "" (cons definicoes (multn n))))))
 
-;(imprime-multn 4)
+(imprime-multn 2)
 
-;testando chamar por linha de comando
-(defn -main [n]
-  (imprime-multn n))
+;number -> files
+(defn gera-arquivos
+  "Gera qtd arquivos com códigos NAND-CIRC para solução do multn, onde n vai de 2 a qtd-1"
+  [qtd]
+  (doseq [i (range (inc qtd))]
+    (if (> i 1)
+       (imprime-multn i))))
+
+;(gera-arquivos 3)

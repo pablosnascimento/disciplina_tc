@@ -1,0 +1,13 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="exercicio1:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/exercicio1_jar</output-path>
+    <root id="archive" name="exercicio1.jar">
+      <element id="module-output" name="exercicio1" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/clojure/spec.alpha/0.2.176/spec.alpha-0.2.176.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/clojure/clojure/1.10.1/clojure-1.10.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/nrepl/nrepl/0.6.0/nrepl-0.6.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/clojure/core.specs.alpha/0.2.44/core.specs.alpha-0.2.44.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/clojure-complete/clojure-complete/0.2.5/clojure-complete-0.2.5.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

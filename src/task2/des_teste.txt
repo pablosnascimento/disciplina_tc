@@ -1,0 +1,7 @@
+x1 = NAND(X[0],X[1])
+o1 = NAND(X[0],X[0])
+o2 = NAND(X[1],X[1])
+x2 = NAND(o1,o2)
+a1 = NAND(x1,x2)
+Y[0] = NAND(a1,a1)
+Y[1] = NAND(x2,x2)
