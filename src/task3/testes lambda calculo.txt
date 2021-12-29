@@ -1,0 +1,80 @@
+
+exercicio 4:
+La. Lb. Lc.(a (b true (c true false))(b c false))
+
+testando a resposta:
+((λa. (λb. (λc. ((a ((b (λt. (λf. t))) ((c (λt. (λf. t))) (λt. (λf. f))))) ((b c) (λt. (λf. f))))))) true true false)
+
+
+Buscando equivalencia com if:
+if-then-else
+(((\b.\t.\e.((b t) e)\x.\y.x) x) y)
+
+(𝜆p,  (a,  (b.  (p (a 𝟙(b 𝟙 𝟘))(a b 𝟘))   I
+(λp. (λa.  (λb. ((p a) b))))            II
+
+por definição (pagina 304), podemos reescrever a função via curring e uma função de 2 argumentos pode ser reescrita como de um 
+único argumento. Assim, temos que 
+(𝜆p,  (a,  (b.  (p (a 𝟙(b 𝟙 𝟘))(a b 𝟘))   
+pode ser reescrita como:
+(𝜆p,  (a,  (b.  ((p (a 𝟙(b 𝟙 𝟘)))(a b 𝟘))   
+
+
+----no livro---
+If 𝑓 = 𝜆𝑥.(𝜆𝑦.𝑒) then (𝑓𝑎)𝑏 corresponds to applying 𝑓𝑎
+and then invoking the resulting function on 𝑏, obtaining the result of
+replacing in 𝑒 the occurrences of 𝑥 with 𝑎 and occurrences of 𝑏 with
+𝑦. By our rules of associativity, this is the same as (𝑓𝑎𝑏) which we’ll
+sometimes also write as 𝑓(𝑎, 𝑏).
+----------------
+
+
+em II se p true, then a, else b
+em I a função p recebe um par de argumentos, mas pode ser compreendida conforme abaixo:
+(𝜆p,  (a,  (b.  ((p (a 𝟙(b 𝟙 𝟘)))(a b 𝟘)) , portanto:
+Em I se condicao p, then (a 𝟙 (b 𝟙 𝟘)), else (a b 𝟘).
+
+
+Avaliando o item mais interno:
+(b 𝟙 𝟘)
+λ> (Lb.b true false) true
+λ > ((λb. ((b true) false)) true)
+    δ > expanded 'true' into '(λt. (λf. t))'
+    δ > expanded 'false' into '(λt. (λf. f))'
+    δ > expanded 'true' into '(λt. (λf. t))'
+Δ > ((λb. ((b (λt. (λf. t))) (λt. (λf. f)))) (λt. (λf. t)))
+α > ((λb. ((b (λt. (λf. t))) (λt. (λf. f)))) (λX0. (λf. X0)))
+β > (((λX0. (λf. X0)) (λt. (λf. t))) (λt. (λf. f)))
+β > ((λf. (λt. (λf. t))) (λt. (λf. f)))
+β > (λt. (λf. t))
+>>> (λt. (λf. t))
+    ↳ equivalent to: true
+
+(Lb.b true false) true
+=> true
+(Lb.b true false) false
+=> false
+
+ou seja, a avaliação da expressão mantém o valor do argumento que b irá assumir, logo (b 𝟙 𝟘) = b.
+Substituindo na expressão resultante, temos:
+(a 𝟙 (b 𝟙 𝟘)) = (a 𝟙 b) 
+
+(La.Lb.a true b) é equivalente ao OR. 
+
+A segunda parte do argumento é (a b 𝟘).  
+La.Lb.(a b 𝟘) é equivalente ao AND.
+
+expressão final é dada por:
+if(p, or(a,b),and(a,b))
+
+se p true:
+p	  a    b		or(a,b)	 	and(a,b)	if(p, or(a,b), and(a,b)) 
+true true true		true		true		true
+true true false		true		false		true
+true false true		true		false		true
+true false false	false		false		false
+				
+false true true		true		true		true
+false true false    true		false		false
+false false true    true		false		false
+false false flase   false		false		false

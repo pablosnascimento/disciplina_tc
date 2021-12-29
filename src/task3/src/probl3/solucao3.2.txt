@@ -1,0 +1,79 @@
+;primeiro, copiamos o ultimo numero para o inicio da cadeia usando separador '='
+0 * * r 0
+0 _ _ l q1
+
+q1 1 I l v1
+q1 0 Z l v2
+q1 # # l read
+
+v1 * * l v1
+v1 _ = l v1a
+v1 = = l v1a
+
+v1a * * l v1a
+v1a _ 1 r i1
+
+i1 * * r i1
+i1 I 1 l q1
+
+v2 * * l v2
+v2 _ = l v2a
+v2 = = l v2a
+
+v2a * * l v2a
+v2a _ 0 r i2
+
+i2 * * r i2
+i2 Z 0 l q1
+
+;depois, podemos ignorar o ultimo numero e trabalhar apenas com os dois primeiros.
+
+;tratando quando vai somar com 1
+read 1 c l h1         ;define o c como 1 e na saida o repõe
+
+h1 * * l h1
+h1 = = l ad1
+
+ad1 Z Z l ad1
+ad1 I I l ad1         
+ad1 _ I r b1          
+ad1 0 I r b1          
+ad1 1 Z l carry       ;usar I e Z serve para esses casos, tratar o carry devidamente
+
+carry 1 0 l carry     ;caso encontre sequencia de 1's é hora de inverter e jogá-lo pra proxima casa
+carry 0 1 r b1        ;se proxima casa é zero, soma
+carry _ 1 r b1        ;se proxima casa excede o numero, vai um no bit da casa seguinte
+
+b1 * * r b1           ;volta até encontrar o caracter c
+b1 c 1 l read         ;atribui o 1 de volta conforme foi o caso (linha 32)
+
+;tratando quando vai somar com zero
+
+read 0 c l h0
+h0 0 0 l h0
+h0 1 1 l h0
+h0 = = l ad0
+
+ad0 Z Z l ad0
+ad0 I I l ad0
+ad0 0 Z r b0
+ad0 _ Z r b0
+ad0 1 I r b0
+
+b0 * * r b0
+b0 c 0 l read          ;como a soma é com 0, volta o c pra zero conforme foi o caso (linha 52)
+
+;le o caracter =, muda pra # e corrige os itens equivalentes a 0's e 1's no estado fim:
+read = # l fim
+
+fim 0 0 l fim
+fim 1 1 l fim
+fim Z 0 l fim
+fim I 1 l fim
+fim _ _ r halt
+
+
+
+
+
+
