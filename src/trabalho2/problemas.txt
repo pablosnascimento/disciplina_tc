@@ -1,0 +1,15 @@
+Problemas Ad Hoc
+1. 12247 – Jollo
+2. 00447 – Population Explosion
+• Pesquisa Completa
+1. 10487 – Closest Sums
+2. 00167 – The Sultan Successor
+• Dividir e Conquistar
+1. 11935 – Through the Desert
+2. 11621 – Small Factors
+• Algoritmos Gulosos
+1. 11269 – Setting Problems
+2. 10602 – Editor Nottobad
+• Programação Dinâmica
+1. 00983 – Localized Summing for …
+2. 11368 – Nested Dolls
