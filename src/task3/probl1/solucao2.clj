@@ -5,7 +5,7 @@
             [clojure.set :as set]
             [clojure.math.combinatorics :as combo]))
 
-(def aut1 {:alphabet #{0 1}
+(def automato1 {:alphabet #{0 1}
            :states #{"q0" "q1" "q2" "q3"}
            :initial "q0"
            :accepting #{"q3"}
@@ -18,7 +18,7 @@
                          ["q3" 0] "q3"
                          ["q3" 1] "q3"}})
 
-(def aut2 {:alphabet #{0 1}
+(def automato2 {:alphabet #{0 1}
            :states #{"s0" "s1" "s2" "s3"}
            :initial "s1"
            :accepting #{"s1" "s2"}
@@ -73,14 +73,36 @@
   [aut1 aut2]
   (let [all-states (new-states aut1 aut2)
         alfabeto (new-alphabet aut1)
+        transitions-aut1 (first (vals (select-keys aut1 [:transitions])))
+        transitions-aut2 (first (vals (select-keys aut2 [:transitions])))
         transicoes (for [s all-states
-                         a alfabeto]
-                     [s a])]
-      transicoes))
+                         a alfabeto
+                         :let [qi (second (first (filter (fn [x] (and (= (first (first x)) (first s)) (= (second (first x)) a))) transitions-aut1)))
+                               pi (second (first (filter (fn [x] (and (= (first (first x)) (second s)) (= (second (first x)) a))) transitions-aut2)))]]
+                     (assoc {} [s a] (conj (conj () pi) qi)))]
+    (reduce conj {} transicoes)))
 
-;(println (new-states aut1 aut1))
-;(println (new-initial aut1 aut2))
-;(println (new-accepting aut1 aut2))
-;(println (in? '(100 109 102) 101 ))
-(println (new-transitions aut1 aut2))
+(defn assinc-aut
+  "Define o autômato assíncrono entre dois autômatos aut1 e aut2"
+  [aut1 aut2]
+  (let [alfabeto (set (new-alphabet aut1))
+        estados (set (new-states aut1 aut2))
+        inicial (new-initial aut1 aut2)
+        aceitaveis (set (new-accepting aut1 aut2))
+        transicoes (set (new-transitions aut1 aut2))]
+    (assoc {} :alphabet alfabeto
+              :states estados
+              :initial inicial
+              :accepting aceitaveis
+              :transitions transicoes)))
+
+;(println (new-states automato1 automato2))
+;(println (new-initial automato1 automato2))
+;(println (new-accepting automato1 automato2))
+;(println (in? '(100 109 102) automato1 ))
+
+;(println (new-transitions automato1 automato2))
+
+;chamada principal
+(println (assinc-aut automato1 automato2))
 
