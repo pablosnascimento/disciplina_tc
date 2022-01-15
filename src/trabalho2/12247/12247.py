@@ -3,9 +3,11 @@
 '''
 
 import sys
+import os
 
 #ENV: 1 submissao; 2 - teste local
 ENV = 1
+PROBLEM_ID = 12247
 
 class Round():
     def __init__(self):
@@ -62,13 +64,11 @@ class Round():
             
     def DefineLastCard(self):
         '''
-        A solução é 
-        Em seguida verificar se esta carta encontrada é suficiente. Se for, principe vence. Se não, ele perde.
+        Verificar se a carta proposta é suficiente. Se for, busca qual a menor possível e principe vence. Se não, busca outras até encontrar. Caso encontre ele vence, senão ele perde.
         '''
         #apenas guardo qual a carta inicial
         self.GetNextCard(1)
         self.output = self.Cards2[2]
-
         cardVitoria = -1
 
         m = DefineMatriz(self)
@@ -85,7 +85,6 @@ class Round():
 
         else:
             #o contrario tambem precisa ocorrer, ou seja, se o teste der vitoria desce a carta até chegar ao mínimo valor possível em que a vitoria ainda ocorre.
-            #self.output = self.Cards2[2]
             cardVitoria = self.output
             derrotas = []
 
@@ -126,7 +125,7 @@ def LerEntradas():
         lines = [line.rstrip() for line in lines]
     else:
         #testes em arquivo local
-        with open('D:/Desenvolvimento/Mestrado/trabalho2/12247/teste.txt') as file:
+        with open(os.getcwd()+'\\%s\\teste.txt' % str(PROBLEM_ID)) as file:
             lines = [line.strip() for line in file]
 
     return lines
@@ -202,7 +201,7 @@ def ObterDerrotas(m):
 
 def main():
 
-    #game é uma lista de rounds
+    #game é uma lista dos outputs
     game = []
 
     #Round é cada rodada do jogo
