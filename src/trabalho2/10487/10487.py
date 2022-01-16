@@ -60,7 +60,6 @@ class Case:
         '''
         Encontra a soma mais próxima adiciona nos outputs.
         '''
-        #code here
         ordenado = sorted(self.set)
         min_idx = 0
         max_idx = len(ordenado) - 1
@@ -106,6 +105,7 @@ class Case:
 
     def Reset(self):
         '''
+        Reinicia os valores para vazio
         '''
         self.set = []
         self.numbers = []
