@@ -5,9 +5,10 @@
 import sys
 import os
 
+__location__ = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
+
 #ENV: 1 submissao; 2 - teste local
-ENV = 1
-PROBLEM_ID = 12247
+ENV = 2
 
 class Round():
     def __init__(self):
@@ -102,8 +103,6 @@ class Round():
                 else:
                     self.output = cardVitoria
 
-            
-
 def PrintOutput(output):
     '''
     Imprime o valor passado.
@@ -125,7 +124,7 @@ def LerEntradas():
         lines = [line.rstrip() for line in lines]
     else:
         #testes em arquivo local
-        with open(os.getcwd()+'\\%s\\teste.txt' % str(PROBLEM_ID)) as file:
+        with open(__location__+'\\teste.txt') as file:
             lines = [line.strip() for line in file]
 
     return lines

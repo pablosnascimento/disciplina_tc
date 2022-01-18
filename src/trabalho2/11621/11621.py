@@ -5,9 +5,10 @@
 import sys
 import os
 
+__location__ = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
+
 #ENV: 1 submissao; 2 - teste local
-ENV = 1
-PROBLEM_ID = 11621
+ENV = 2
 
 def PrintOutput(output):
     '''
@@ -30,7 +31,7 @@ def LerEntradas():
         lines = [line.rstrip() for line in lines]
     else:
         #testes em arquivo local
-        with open(os.getcwd()+'\\%s\\teste.txt' % str(PROBLEM_ID)) as file:
+        with open(__location__+'\\teste.txt') as file:
         #with open(os.getcwd()+'\\teste.txt') as file:
             lines = [line.strip() for line in file]
 
