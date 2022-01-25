@@ -4,6 +4,7 @@
 
 import sys
 import os
+import functools
 
 #https://www.youtube.com/watch?v=cjWnW0hdF1Y tutorial LIS
 #https://stackoverflow.com/questions/40813044/nested-boxes-algorithm-based-on-nested-dolls-but-fundamentally-different
@@ -93,6 +94,7 @@ class Doll():
 
         i = 0
         encaixados = []
+        todosEncaixados = []
 
         while (i < len(self.Lista)):
             doll = self.Lista[i]
@@ -104,11 +106,13 @@ class Doll():
                 if DollEncaixa(ultimoEncaixado, doll):
                     encaixados.remove(ultimoEncaixado)
                     encaixados.append(doll)
+                    todosEncaixados.append(doll)
                     self.Lista.remove(doll)
                     continue
                 #se nao se encaixa, mas é o ultimo da lista a ser classificado, adiciona na fila e termina
                 elif 1 == len(self.Lista):
                     encaixados.append(doll)
+                    todosEncaixados.append(doll)
                     self.Lista.remove(doll)
                     continue
 
@@ -120,6 +124,7 @@ class Doll():
                     #proximoMelhor = self.MelhorEncaixe(doll, j)
                     #doll_encaixar = proximoMelhor
                     encaixados.append(doll_encaixar)
+                    todosEncaixados.append(doll_encaixar)
                     self.Lista.remove(doll_encaixar)
                     self.Lista.remove(doll)
                     i = 0
@@ -127,12 +132,13 @@ class Doll():
                 elif j == len(self.Lista) - 1:
                     #percorreu toda a lista e não encaixou ninguem, repassa pra lista de encaixe sozinho
                     encaixados.append(doll)
+                    todosEncaixados.append(doll)
                     self.Lista.remove(doll)
                     i = 0
 
         n_dolls = len(encaixados)
 
-        return n_dolls
+        return n_dolls, todosEncaixados
 
     def Calculate2(self):
         '''
@@ -161,6 +167,10 @@ class Doll():
         
         return max(seqDecrescentes)
 
+    def Calculate3(self):
+        '''
+        Varre a lista marcando quem não se encaixa em ninguem e conta quantos unicos ficam no final.
+        '''
 
 
     def Reset(self):
@@ -182,6 +192,7 @@ def main():
 
     saidas = []
     testes = int(lines[0])
+    todosEncaixes = []
 
     doll = Doll()
 
@@ -190,14 +201,20 @@ def main():
         line = lines[i+1]
 
         doll.Fill(n_dolls, line)
-        #result = doll.Calculate()
-        result = doll.Calculate2()
+        #result, todosEncaixes = doll.Calculate()
+        #result = doll.Calculate2()
+        result = doll.Calculate3()
 
         saidas.append(result)
         doll.Reset()
 
     for i in range(len(saidas)):
         PrintOutput(saidas[i])
+
+
+    for i in range(len(todosEncaixes)):
+        print("(%d %d)" % (todosEncaixes[i][0], todosEncaixes[i][1]))
+
     return
 
 

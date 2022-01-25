@@ -9,7 +9,7 @@ import functools
 __location__ = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
 
 #ENV: 1 submissao; 2 - teste local
-ENV = 1
+ENV = 2
 
 def PrintOutput(output):
     '''
@@ -40,17 +40,25 @@ def LerEntradas():
 def CustoJob1ParaJob2(job1, job2):
     '''
     Função que calcula o custo entre duas tarefas na ordem em que são passadas.
+    a b -> custo = a + (caso igual | caso maior | caso menor) + d
+    c d
     '''
     s = 0
     g = 1
 
-    custo = job2[g] #custo da próxima tarefa a ser executada na sequencia
+    custo = job1[s]
     
-    #Para o Sultan executar a proxima tarefa verifica se ela tem custo menor que a do Golibaba. Se tiver, soma no custo a diferença
-    if job1[g] >= job2[s]:
-        custo += job1[g] - job2[s]
+    if (job1[g] == job2[s]):
+        custo += job1[g] 
+    elif (job1[g] > job2[s]):
+        custo += job1[g]
+    elif (job1[g] < job2[s]):
+        custo += job2[s]
+    
+    custo += job2[g] 
 
     return custo
+ 
 
 def OrdenaJob(job2, job1):
     '''
