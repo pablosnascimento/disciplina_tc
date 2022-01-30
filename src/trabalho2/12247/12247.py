@@ -2,6 +2,7 @@
 12247 – Jollo
 '''
 
+from itertools import permutations
 import sys
 import os
 
@@ -136,57 +137,28 @@ def DefineMatriz(round):
 
     n = 6
     
-    a = round.Cards1[0]
-    b = round.Cards1[1]
-    c = round.Cards1[2]
+    # a = round.Cards1[0]
+    # b = round.Cards1[1]
+    # c = round.Cards1[2]
     x = round.Cards2[0]
     y = round.Cards2[1]
     z = round.Cards2[2]
 
+    #criando todas combinações de a, b e c
+    permutacoes = list(permutations(round.Cards1))
+
     linha = [0] * n
     m = [linha] * 36
 
-    m[0] = [a, b, c, x, y, z]
-    m[1] = [a, b, c, x, z, y]
-    m[2] = [a, b, c, y, x, z]
-    m[3] = [a, b, c, y, z, x]
-    m[4] = [a, b, c, z, y, x]
-    m[5] = [a, b, c, z, x, y]
-
-    m[6] = [a, c, b, x, y, z]
-    m[7] = [a, c, b, x, z, y]
-    m[8] = [a, c, b, y, x, z]
-    m[9] = [a, c, b, y, z, x]
-    m[10] = [a, c, b, z, y, x]
-    m[11] = [a, c, b, z, x, y]
-
-    m[12] = [b, a, c, x, y, z]
-    m[13] = [b, a, c, x, z, y]
-    m[14] = [b, a, c, y, x, z]
-    m[15] = [b, a, c, y, z, x]
-    m[16] = [b, a, c, z, y, x]
-    m[17] = [b, a, c, z, x, y]
-
-    m[18] = [b, c, a, x, y, z]
-    m[19] = [b, c, a, x, z, y]
-    m[20] = [b, c, a, y, x, z]
-    m[21] = [b, c, a, y, z, x]
-    m[22] = [b, c, a, z, y, x]
-    m[23] = [b, c, a, z, x, y]
-
-    m[24] = [c, b, a, x, y, z]
-    m[25] = [c, b, a, x, z, y]
-    m[26] = [c, b, a, y, x, z]
-    m[27] = [c, b, a, y, z, x]
-    m[28] = [c, b, a, z, y, x]
-    m[29] = [c, b, a, z, x, y]
-
-    m[30] = [c, a, b, x, y, z]
-    m[31] = [c, a, b, x, z, y]
-    m[32] = [c, a, b, y, x, z]
-    m[33] = [c, a, b, y, z, x]
-    m[34] = [c, a, b, z, y, x]
-    m[35] = [c, a, b, z, x, y]
+    for i in range(len(permutacoes)):
+        p = permutacoes[i]
+        idx = i*6
+        m[0+idx] = [p[0], p[1], p[2], x, y, z]
+        m[1+idx] = [p[0], p[1], p[2], x, z, y]
+        m[2+idx] = [p[0], p[1], p[2], y, x, z]
+        m[3+idx] = [p[0], p[1], p[2], y, z, x]
+        m[4+idx] = [p[0], p[1], p[2], z, y, x]
+        m[5+idx] = [p[0], p[1], p[2], z, x, y]
 
     return m
 
