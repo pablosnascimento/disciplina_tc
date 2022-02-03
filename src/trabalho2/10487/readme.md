@@ -1,19 +1,34 @@
 # Trabalho 2 -- Teoria da Computação -- 2021/2
 
-**Projeto e Desenvolvimento de Algoritmos**
+**Projeto e Análise de Algoritmos**
 **Autor:** Pablo S Nascimento
 
 ## Problema 10487 – Closest Sum
 
-Dado um certo número 'n' e um conjunto de números, qual é a soma de dois números pertencentes ao conjunto mais próxima do número n.
+Este problema fornece como entrada um conjunto de numeros inteiros e uma sequencia de queries, que são casos de teste. Cada query fornece um número e pede que se encontre qual a soma de dois números existentes no cojunto tem o valor mais próximo do número indicado.
 
-**Solução**
-A solução dada foi ordenar o vetor dos números a serem somados e para cada n informado calcular a soma mais proxima da seguinte forma: 
-1) pega o primeiro e o ultimo e soma;
-2) guarda na variavel 'soma_final' o valor mais próximo encontrado até o momento
-3) compara 'soma' com o valor de n e anda o vetor pra cima ou pra baixo conforme resultado
-4) quando tiver somado todos valores do vetor ou encontrar soma igual a n para.
+## Artefatos
+
+Disponibilizei um arquivo chamado teste.txt contendo as entradas que se desejar testar.
+
+**Análise de Complexidade**
+
+Minha solução faz a leitura das entradas e as interpreta pelo for linha a linha, constrói cada caso de teste e o avalia. 
+
+Para cada Case devidamente preenchido pelas entradas calcula o resultado pela função Calculate(). Neste caso, temos a execução desta função para cada novo Case definido. Analisemos, portanto, a função Calculate().
+
+ordenado = sorted(self.set)                             # O(n log n)
+...
+for n in self.numbers:                                  # O(m), depende da quantidade de elementos de self.numbers
+    ...
+    while min_idx < max_idx:                            # O(m)*O(n), vai executar uma vez para cada elemento do conjunto self.set
+        soma = ordenado[min_idx] + ordenado[max_idx]    # O(m)*O(n)*(O(n/2) + O(n/2)),  executará o slice em ordenado n/2 vezes para min_idx e max_idx
+
+        ...                                             # demais funções O(1)
+
+Logo, a complexidade da solução apresentada no pior caso tende a O(n*m), pois o maior custo é o while dentro do for com slice em O(n) sendo executado a cada vez. Se a quantidade de m e n forem iguais, tende a O(n^2).
 
 **Execução**
-É possível executar o código preenchendo o arquivo teste.txt com as entradas possíveis, uma por linha, finalizando com a linha 0
-Alterar o valor da variável ENV = 2 para executar lendo do arquivo e ENV = 1 para submeter o código no Online Judge.
+Com arquivo teste.txt preenchido, para executar a função no prompt execute, por exemplo:
+
+python 10487.py > resultado.txt

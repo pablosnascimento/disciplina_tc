@@ -60,7 +60,7 @@ class Case:
         self.n_presses = len(palavra)
         participantes = self.words[1:]
 
-        #Vamos monstar um vetor ordenado senod a junção de outros dois vetores formados da seguinte forma:
+        #Vamos montar um vetor ordenado senod a junção de outros dois vetores formados da seguinte forma:
         #O primeiro contendo as palavras que iniciem com a mesma letra da primeira palavra para economizar comandos;
         #O segundo, unimos o restante das palavras não existentes no primeiro vetor de forma ordenada
         iguais = [item for item in participantes if item == palavra]
