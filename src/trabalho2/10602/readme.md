@@ -36,6 +36,8 @@ while n > 0:                                                    # O(n)
 Logo, a complexidade da solução apresentada no pior caso tende a O(n log n) devido às execuções de *ordenação*. Embora faça while ordenando novamente subvetores, a quantidade dessas chamadas de ordenação depende diretamente do tamanho das palavras que é limitado, portanto, podemos considerar constante.
 
 **Execução**
-Com arquivo teste.txt preenchido, para executar a função no prompt execute, por exemplo:
+> Variável global ENV = 2 -> teste local; ENV = 1 -> submissão no UVA Judge.
+
+> Com arquivo teste.txt preenchido, para executar a função no prompt execute, por exemplo:
 
 python 10602.py > resultado.txt

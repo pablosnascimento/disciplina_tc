@@ -19,7 +19,7 @@ Para cada ano em n indicado na entrada implica em uma chamada de avaliação da 
 
 Analisemos, portanto, a função BuildPopulationNextYear().
 
-pop = [[0 for i in range(SIZE)] for j in range(SIZE)]   # 1, não depende de n
+pop = [[0 for i in range(SIZE)] for j in range(SIZE)]   # 20*20=O(1), não depende de n
 														#
 if self.years == 0:                                     # 1
     return []                                           # 1
@@ -37,6 +37,8 @@ NextYear() chama Neighbors() que tem custo O(1) preparando a matriz independente
 Logo, a complexidade da solução apresentada é O(n), sempre dependendo do número de anos que se deseja trabalhar a projeção da próxima população.
 
 **Execução**
-Com arquivo teste.txt preenchido, para executar a função no prompt execute, por exemplo:
+> Variável global ENV = 2 -> teste local; ENV = 1 -> submissão no UVA Judge.
+
+> Com arquivo teste.txt preenchido, para executar a função no prompt execute, por exemplo:
 
 python 00447.py > resultado.txt

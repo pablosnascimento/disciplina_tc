@@ -164,7 +164,7 @@ def DefineMatriz(round):
 
 def ObterDerrotas(m):
     '''
-    Obtem uma lista com as combinações em que o princpe perde o round.
+    Obtem uma lista com as combinações em que o principe perde o round.
     '''
     perde = [x for x in m if (x[0] > x[3] and x[1] > x[4]) or (x[0] > x[3] and x[2] > x[5]) or (x[1] > x[4] and x[2] > x[5])]
 
