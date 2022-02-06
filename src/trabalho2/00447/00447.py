@@ -8,7 +8,7 @@ import os
 __location__ = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
 
 #ENV: 1 submissao; 2 - teste local
-ENV = 1
+ENV = 2
 SIZE = 20
 ASTERISCOS = "********************"
 
